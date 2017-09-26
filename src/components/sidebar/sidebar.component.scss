@@ -1,5 +1,6 @@
 @import '../../../node_modules/kio-ng2-uiux/scss/utils';
 
+
 .kio-sidebar__body {
     position: fixed;
     z-index: 20;
@@ -25,6 +26,9 @@
         background: $color-background-dark;
 
         @media #{$medium-up} {
+            width: 38vw;
+        }
+        @media #{$large-up} {
             width: 45vw;
         }
 
@@ -111,8 +115,14 @@
         will-change: border-color;
         @extend %bordered-ui-button;
 
+
         .is-scrolled-100 & {
             border-color: $color-background-dark;
+        }
+
+        @media #{$medium-only} {
+            width: rem-calc(53);
+            height: rem-calc(53);
         }
 
         @media #{$medium-up} {

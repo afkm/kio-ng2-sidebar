@@ -71,7 +71,7 @@ export class SidebarMenuComponent implements OnInit {
   } )
   
   ngOnInit() {
-    this.localeService.changes.subscribe((locale:string)=>{
+    this.localeService.changes.subscribe((locale)=>{
       this.locale = locale
       this.lang = locale.substr(0,2)
     })
