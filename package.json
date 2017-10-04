@@ -1,6 +1,6 @@
 {
   "name": "kio-ng2-sidebar",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "no description",
   "main": "./release/module",
   "module": "./release/module",
