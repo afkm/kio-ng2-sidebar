@@ -1,6 +1,6 @@
 import { Component, Optional, OnInit, Input, Inject, ViewEncapsulation } from '@angular/core';
 import { LocaleService } from 'kio-ng2-i18n'
-import { SitemapService, SitemapChapterService, LocalizedChapter, Config, ChapterConfig } from 'kio-ng2-sitemap'
+import { SitemapService, SitemapChapterService, LocalizedChapter, Config, ChapterConfig, ChapterResolver } from 'kio-ng2-sitemap'
 import { Menu, MenuItem } from '../../interfaces/menu'
 
 import { SitemapLoader } from '../../interfaces/loader'
@@ -32,6 +32,7 @@ export class SidebarMenuComponent implements OnInit {
     private localeService:LocaleService, 
     private sitemapChapterService:SitemapChapterService,
     private sidebarService:SidebarService,
+    private chapterResolver:ChapterResolver,
     @Optional() @Inject(SITEMAP_LOADER) private sitemapLoader:SitemapLoader
   ) { }
 
@@ -62,12 +63,14 @@ export class SidebarMenuComponent implements OnInit {
     }
   }
 
-  private navSubscription=this.sitemapChapterService.allModels.subscribe ( models => {
+  /*private navSubscription=this.sitemapChapterService.allModels.subscribe ( models => {
     this.navigationItems = []
   } )
-  private chapterNavSubscription = this.sitemapChapterService.navigation.filter( chapter => chapter.locale === this.localeService.currentLocale )
-  .subscribe ( chapter => {
-    this.navigationItems.push(chapter)
+  */
+  
+  private chapterNavSubscription = this.chapterResolver.localizedChapters
+  .subscribe ( (chapters:LocalizedChapter[]) => {
+    this.navigationItems = chapters.slice()
   } )
   
   ngOnInit() {

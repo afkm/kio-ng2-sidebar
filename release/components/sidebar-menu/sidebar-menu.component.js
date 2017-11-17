@@ -1,6 +1,6 @@
 import { Component, Optional, Input, Inject, ViewEncapsulation } from '@angular/core';
 import { LocaleService } from 'kio-ng2-i18n';
-import { SitemapChapterService } from 'kio-ng2-sitemap';
+import { SitemapChapterService, ChapterResolver } from 'kio-ng2-sitemap';
 import { SITEMAP_LOADER } from '../../injection/loader.token';
 import { SidebarService } from '../../services/sidebar.service';
 export var SidebarMenuTheme;
@@ -9,23 +9,25 @@ export var SidebarMenuTheme;
     SidebarMenuTheme[SidebarMenuTheme["sidebar"] = 1] = "sidebar";
 })(SidebarMenuTheme || (SidebarMenuTheme = {}));
 var SidebarMenuComponent = /** @class */ (function () {
-    function SidebarMenuComponent(localeService, sitemapChapterService, sidebarService, sitemapLoader) {
+    function SidebarMenuComponent(localeService, sitemapChapterService, sidebarService, chapterResolver, sitemapLoader) {
         var _this = this;
         this.localeService = localeService;
         this.sitemapChapterService = sitemapChapterService;
         this.sidebarService = sidebarService;
+        this.chapterResolver = chapterResolver;
         this.sitemapLoader = sitemapLoader;
         this.locale = this.localeService.currentLocale;
         this.lang = this.localeService.currentLocale.substr(0, 2);
         //slugs:MenuSlug[]=this.sitemapService.sitemap.items.map ( item => item.slug )
         this.navigationItems = [];
         this.theme = SidebarMenuTheme.main;
-        this.navSubscription = this.sitemapChapterService.allModels.subscribe(function (models) {
-            _this.navigationItems = [];
-        });
-        this.chapterNavSubscription = this.sitemapChapterService.navigation.filter(function (chapter) { return chapter.locale === _this.localeService.currentLocale; })
-            .subscribe(function (chapter) {
-            _this.navigationItems.push(chapter);
+        /*private navSubscription=this.sitemapChapterService.allModels.subscribe ( models => {
+          this.navigationItems = []
+        } )
+        */
+        this.chapterNavSubscription = this.chapterResolver.localizedChapters
+            .subscribe(function (chapters) {
+            _this.navigationItems = chapters.slice();
         });
     }
     SidebarMenuComponent.prototype.onClick = function (event, navigationItem) {
@@ -66,6 +68,7 @@ var SidebarMenuComponent = /** @class */ (function () {
         { type: LocaleService, },
         { type: SitemapChapterService, },
         { type: SidebarService, },
+        { type: ChapterResolver, },
         { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [SITEMAP_LOADER,] },] },
     ]; };
     SidebarMenuComponent.propDecorators = {
