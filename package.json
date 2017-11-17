@@ -71,7 +71,7 @@
     "kio-ng2-ctn": "github:afkm/kio-ng2-ctn#v0.0.7",
     "kio-ng2-data": "github:afkm/kio-ng2-data#v0.0.1",
     "kio-ng2-i18n": "github:afkm/kio-ng2-i18n#v0.0.3",
-    "kio-ng2-sitemap": "github:afkm/kio-ng2-sitemap",
+    "kio-ng2-sitemap": "github:afkm/kio-ng2-sitemap#v0.0.4",
     "kio-ng2-uiux": "github:afkm/kio-ng2-uiux#v0.0.5",
     "mocha": "^3.5.3",
     "ng-inline-svg": "^3.0.0",
