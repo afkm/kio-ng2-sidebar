@@ -70,7 +70,7 @@ export class SidebarMenuComponent implements OnInit {
   
   private chapterNavSubscription = this.chapterResolver.localizedChapters
   .subscribe ( (chapters:LocalizedChapter[]) => {
-    this.navigationItems = chapters.slice()
+    this.updateNavigationItems(chapters)
   } )
   
   ngOnInit() {
@@ -79,6 +79,10 @@ export class SidebarMenuComponent implements OnInit {
       this.lang = locale.substr(0,2)
     })
 
+  }
+
+  private updateNavigationItems ( navigationItems:LocalizedChapter[] ) {
+    this.navigationItems = navigationItems.filter( chapter => chapter.hideInNavigation !== true )
   }
 
 }
