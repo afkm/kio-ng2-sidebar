@@ -34,6 +34,7 @@ export function sidebarConfigFactory ( sitemapNavigation:SitemapNavigation ):Sid
   imports: [
     KioNg2SitemapModule,
     InlineSVGModule,
+    RouterModule,
     KioNg2UIUXModule,
     CommonModule,
   ],

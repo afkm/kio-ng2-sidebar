@@ -36,6 +36,8 @@ export class SidebarMenuComponent implements OnInit {
     @Optional() @Inject(SITEMAP_LOADER) private sitemapLoader:SitemapLoader
   ) { }
 
+  useRouterLink:boolean=this.sitemapChapterService.config.pagingEnabled
+
   locale:string=this.localeService.currentLocale
   lang:string=this.localeService.currentLocale.substr(0,2)
   //slugs:MenuSlug[]=this.sitemapService.sitemap.items.map ( item => item.slug )
@@ -82,6 +84,7 @@ export class SidebarMenuComponent implements OnInit {
   }
 
   private updateNavigationItems ( navigationItems:LocalizedChapter[] ) {
+    //console.log('update navigation items', navigationItems)
     this.navigationItems = navigationItems.filter( chapter => chapter.hideInNavigation !== true )
   }
 
