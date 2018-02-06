@@ -7,8 +7,8 @@
 
     <ol *ngIf="navigationItems">
         <li *ngFor="let navigationItem of navigationItems; let idx=index" routerLinkActive="item-active" [ngClass]="'sitemap-state-'+navigationItem.state" >
-            <a *ngIf="useRouterLink" (click)="onClick($event,navigationItem)" [routerLink]="[lang,navigationItem.slug]">{{navigationItem.title | translate}}</a>
-            <a *ngIf="!useRouterLink" (click)="onClick($event,navigationItem)" href="#">{{navigationItem.title | translate}}</a>
+            <a *ngIf="useRouterLink" (click)="onClick($event,navigationItem)" [routerLink]="[lang,navigationItem.slug]" [innerHTML]="navigationItem.title | translate"></a>
+            <a *ngIf="!useRouterLink" (click)="onClick($event,navigationItem)" href="#" [innerHTML]="navigationItem.title | translate"></a>
             <div class="spinner" [inlineSVG]="'/assets/images/spinner.svg'"></div>
         </li>
     </ol>
